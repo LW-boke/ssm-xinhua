@@ -1,0 +1,45 @@
+.menu_left {
+
+}
+
+.keywordCla {
+    margin-left: 100px;
+    height: 35px;
+    margin-top: 10px;
+    width: 200px;
+    outline: none;
+}
+
+.menu_left h3 {
+    text-align: center;
+    font-size: 24px;
+}
+
+.menu_left ul {
+    margin-top: 100px;
+}
+
+.menu_left ul li {
+    list-style: none;
+    line-height: 50px;
+    background: url("/static/images/porana-data.png") no-repeat right;
+    background-size: 16px;
+    width: 120px;
+
+}
+
+.menu_left ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.menu_left ul li .elect {
+    color: #fa0200;
+}
+
+.menu_left ul li a:hover {
+    text-decoration: underline;
+    color: red;
+}

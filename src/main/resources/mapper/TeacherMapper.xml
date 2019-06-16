@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.TeacherMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Teacher">
+        <id column="tea_id" property="teaId" jdbcType="BIGINT"/>
+        <result column="tea_name" property="teaName" jdbcType="VARCHAR"/>
+        <result column="tea_sex" property="teaSex" jdbcType="BIT"/>
+        <result column="tea_age" property="teaAge" jdbcType="DATE"/>
+        <result column="tea_about" property="teaAbout" jdbcType="VARCHAR"/>
+        <result column="tea_enrol" property="teaEnrol" jdbcType="DATE"/>
+        <result column="tea_phone" property="teaPhone" jdbcType="VARCHAR"/>
+        <result column="tea_site" property="teaSite" jdbcType="VARCHAR"/>
+        <association property="profession" javaType="Profession">
+            <id column="pro_id" property="proId" jdbcType="BIGINT"/>
+            <result column="pro_name" property="proName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <sql id="termId">
+        <where>
+            <if test="id != ''and id != null">
+                p.pro_id = #{id}
+            </if>
+            <if test="keyword != null and keyword != '' ">
+                and t.tea_name like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from teacher
+    where tea_id = #{teaId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="club.lw666.domain.Teacher">
+    insert into teacher (tea_id, tea_name, tea_sex, 
+      tea_age, tea_enrol,tea_about,tea_phone,
+      tea_site,pro_id)
+    values (#{teaId,jdbcType=BIGINT}, #{teaName,jdbcType=VARCHAR}, #{teaSex,jdbcType=BIT}, 
+      #{teaAge,jdbcType=DATE}, #{teaEnrol,jdbcType=DATE},#{teaAbout}, #{teaPhone,jdbcType=VARCHAR},
+      #{teaSite,jdbcType=VARCHAR},#{profession.proId})
+  </insert>
+    <!--根据班级id和课程id设置老师id-->
+    <insert id="insertTeacherIdWidthClaAndCouId">
+      update clas_cou_rel set tea_id = #{teaId} where cla_id = #{claId} and cou_id = #{couId};
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Teacher">
+    update teacher
+    set tea_name = #{teaName,jdbcType=VARCHAR},
+      tea_sex = #{teaSex,jdbcType=BIT},
+      tea_age = #{teaAge,jdbcType=DATE},
+      tea_enrol = #{teaEnrol,jdbcType=DATE},
+      tea_About = #{teaAbout,jdbcType=VARCHAR},
+      tea_phone = #{teaPhone,jdbcType=VARCHAR},
+      tea_site = #{teaSite,jdbcType=VARCHAR},
+      pro_id = #{profession.proId}
+    where tea_id = #{teaId,jdbcType=BIGINT}
+  </update>
+
+    <update id="updateClasAndCouWidthByTeaId">
+          update clas_cou_rel set tea_id = null where tea_id = #{teaId}
+    </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select tea_id, tea_name, tea_sex, tea_age, tea_enrol, tea_phone, tea_site
+    from teacher
+    where tea_id = #{teaId,jdbcType=BIGINT}
+  </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select tea_id, tea_name, tea_sex, tea_age,tea_about, tea_enrol, tea_phone, tea_site
+        from teacher
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                tea_name like concat("%",#{keyword},"%")
+            </if>
+        </where>
+    </select>
+
+    <!--获取所有的老师进行分页-->
+    <select id="getTeachersPage" resultMap="BaseResultMap">
+        select
+        t.tea_id,
+        t.tea_name,
+        t.tea_sex,
+        t.tea_age,
+        t.tea_about,
+        t.tea_enrol,
+        t.tea_phone,
+        t.tea_site,
+        p.pro_id,
+        p.pro_name
+        from teacher as t left join profession as p on t.pro_id = p.pro_id
+        <include refid="termId"/>
+        order by t.tea_id desc
+    </select>
+    <!--根据职业Id查询Teacher-->
+    <select id="getTeacherByProId" resultMap="BaseResultMap">
+        select * from teacher
+        <where>
+            <if test="proId !=null">
+                pro_id = #{proId}
+            </if>
+        </where>
+    </select>
+
+    <!--根据班级id和课程id查询老师-->
+    <select id="getTeacherWidthByClasIdAndCouId" resultMap="BaseResultMap">
+        select * from teacher
+        <where>
+            <if test="clasId !=null and couId != null">
+                tea_id in(select tea_id from clas_cou_rel where cla_id = #{clasId} and cou_id = #{couId});
+            </if>
+        </where>
+    </select>
+</mapper>

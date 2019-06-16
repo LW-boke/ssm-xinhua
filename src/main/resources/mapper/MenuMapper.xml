@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="text" property="text" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+
+        <association property="permission" javaType="Permission">
+            <id column="p_id" property="pId" jdbcType="BIGINT"/>
+            <result column="p_name" property="pName" jdbcType="VARCHAR"/>
+            <result column="p_resource" property="pResource" jdbcType="VARCHAR"/>
+        </association>
+
+        <collection property="children" ofType="club.lw666.domain.Menu" select="getMenuWidthByParentId" column="id"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="club.lw666.domain.Menu">
+    insert into menu (id, text, url, 
+      parent_id, permission_id)
+    values (#{id,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{permissionId,jdbcType=BIGINT})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Menu">
+    update menu
+    set text = #{text,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      permission_id = #{permissionId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, text, url, parent_id, permission_id
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+    <select id="getMenuWidthByParentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        m.id, m.text, m.url,p.p_name,p.p_resource
+        from menu as m left join permission as p on m.permission_id = p.p_id where parent_id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select id, text, url, parent_id, permission_id
+       from menu
+  </select>
+    <!--获取所有tree树 -->
+    <select id="getMenuTrees" resultMap="BaseResultMap">
+      select id, text, url, parent_id, permission_id
+       from menu where parent_id is null
+  </select>
+</mapper>

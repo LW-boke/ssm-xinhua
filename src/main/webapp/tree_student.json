@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "text": "学校管理",
+    "iconCls": "icon-man",
+    "state": "open",
+    "children": [
+      {
+        "text": "年级列表",
+        "checked": true,
+        "url": "/grade"
+      },
+      {
+        "text": "学生列表",
+        "checked": true,
+        "url": "/student"
+      },
+      {
+        "text": "老师列表",
+        "checked": true,
+        "url": "/teacher"
+      },
+      {
+        "text": "班级列表",
+        "checked": true,
+        "url": "/clazz"
+      },
+      {
+        "text": "课程列表",
+        "checked": true,
+        "url": "/course"
+      }
+    ]
+  }
+]

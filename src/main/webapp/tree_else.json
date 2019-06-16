@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "text": "权限管理",
+    "iconCls": "icon-man",
+    "state": "open",
+    "children": [
+      {
+        "text": "用户管理",
+        "checked": true,
+        "url": "/user"
+      },
+      {
+        "text": "角色管理",
+        "checked": true,
+        "url": "/role"
+      },
+      {
+        "text": "权限管理",
+        "url": "/permission"
+      }
+    ]
+  }
+]

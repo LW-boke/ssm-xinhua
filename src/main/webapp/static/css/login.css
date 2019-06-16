@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.head {
+    width: 1190px;
+    margin: 0 auto;
+}
+
+.head span {
+    text-align: center;
+    font-size: 16px;
+    color: #3d3d3d;
+    font-weight: 400;
+}
+
+.head h3 {
+    font-size: 24px;
+    margin-left: 120px;
+    text-align: left;
+}
+
+.content {
+    height: 440px;
+    width: 100%;
+    background: url("/static/images/xykjr-PC.jpg") no-repeat center;
+}
+
+.content .loginForm {
+    width: 400px;
+    height: 400px;
+    background: #fff3f3;
+    float: right;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+.content .loginForm h3 {
+    font-size: 24px;
+    color: black;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(192, 192, 192, 0.48);
+}
+
+.content .loginForm .itme {
+    width: 80%;
+    height: 40px;
+    border: 1px solid rgb(192, 192, 192);
+    margin-left: 40px;
+    position: relative;
+    top: 20px;
+    margin-top: 30px;
+}
+
+.content .loginForm .itme label {
+    width: 40px;
+    height: 100%;
+    border-right: 1px solid rgba(192, 192, 192, 0.48);
+    position: absolute;
+    left: 0;
+    background: url("/static/images/name.png") no-repeat center rgba(51, 51, 51, 0.43);
+}
+
+
+.content .loginForm .itme input {
+    padding-left: 10px;
+    font-size: 18px;
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    left: 40px;
+    outline: none;
+    border: 0;
+    /*background: red;*/
+}
+
+.content_login {
+    width: 1190px;
+    height: 100%;
+
+    margin: 0 auto;
+}
+
+.buttom {
+    margin-top: 160px;
+    width: 100%;
+    background-color: #333;
+    height: 200px;
+}

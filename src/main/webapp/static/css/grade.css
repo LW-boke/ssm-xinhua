@@ -1,0 +1,34 @@
+.container {
+    text-align: center;
+    color: #fff;
+}
+.tmpconter {
+    width: 180px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.tmpconter li {
+    width: 100%;
+    list-style: none;
+    text-align: left;
+    line-height: 28px;
+}
+
+.tmpconter li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.tmpconter li a:hover {
+    text-decoration: underline;
+}
+
+.tmpconter li .elect {
+    color: red;
+}
+
+
+

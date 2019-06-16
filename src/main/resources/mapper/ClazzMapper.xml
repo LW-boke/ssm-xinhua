@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.ClazzMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Clazz">
+        <id column="cla_id" property="claId" jdbcType="BIGINT"/>
+        <result column="cla_name" property="claName" jdbcType="VARCHAR"/>
+        <result column="cla_number" property="claNumber" javaType="INT"/>
+        <result column="cla_open_date" property="claOpenDate" jdbcType="DATE"/>
+        <result column="pro_id" property="proId"/>
+        <association property="refNumber" javaType="Integer" select="club.lw666.mapper.StudentMapper.getStudentByClsNum"
+                     column="cla_id"/>
+        <!--年级-->
+        <association property="grade" javaType="Grade">
+            <id property="graNum" column="gra_num"/>
+            <result property="graName" column="gra_name"/>
+        </association>
+        <!--老师-->
+        <association property="teacher" javaType="Teacher">
+            <id column="tea_id" property="teaId" jdbcType="BIGINT"/>
+            <result column="tea_name" property="teaName" jdbcType="VARCHAR"/>
+            <result column="tea_sex" property="teaSex" jdbcType="BIT"/>
+            <result column="tea_age" property="teaAge" jdbcType="DATE"/>
+            <result column="tea_enrol" property="teaEnrol" jdbcType="DATE"/>
+            <result column="tea_phone" property="teaPhone" jdbcType="VARCHAR"/>
+            <result column="tea_site" property="teaSite" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="clazz" type="club.lw666.domain.Clazz">
+        <id column="cla_id" property="claId" jdbcType="BIGINT"/>
+        <result column="cla_name" property="claName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="selectLike">
+        <where>
+            <if test="keyword != ''and keyword != null">
+                cla.cla_name like concat("%",#{keyword},"%")
+            </if>
+        </where>
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from clazz
+    where cla_id = #{claId,jdbcType=BIGINT}
+  </delete>
+
+    <insert id="insert" parameterType="club.lw666.domain.Clazz" useGeneratedKeys="true" keyProperty="claId"
+            keyColumn="cla_id">
+            insert into clazz (
+               cla_id,
+               cla_name,
+               cla_open_date,
+               cla_number,
+               gra_num,
+               tea_id
+               )
+            values (
+               #{claId,jdbcType=BIGINT},
+               #{claName,jdbcType=VARCHAR},
+               #{claOpenDate,jdbcType=DATE},
+               #{claNumber},
+               #{grade.graNum},
+               #{teacher.teaId}
+              )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Clazz">
+    update clazz
+    set cla_name = #{claName,jdbcType=VARCHAR},
+      cla_open_date = #{claOpenDate,jdbcType=DATE},
+      cla_number = #{claNumber},
+      gra_num = #{grade.graNum},
+       tea_id = #{teacher.teaId}
+    where cla_id = #{claId,jdbcType=BIGINT}
+  </update>
+    <!--根据课程id 清空关联的班级-->
+    <update id="updateClazzWidthByTeaId">
+       update clazz set tea_id = null where tea_id = #{teacher.teaId}
+    </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select cla_id, cla_name, cla_open_date, gar_num
+    from clazz
+    where cla_id = #{claId,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+
+    select cla_id, cla_name, cla_open_date, gar_num
+    from clazz
+
+  </select>
+    <!--获取clazz数据并且进行分页-->
+    <select id="queryClazzPage" resultMap="BaseResultMap">
+        select
+        cla.cla_id,
+        cla.cla_name,
+        cla.cla_number,
+        cla.cla_open_date,
+        gra.gra_num,
+        gra.gra_name,
+        tea.tea_id,
+        tea.tea_name
+        from clazz as cla
+        left join grade as gra on cla.gra_num = gra.gra_num
+        left join teacher as tea on cla.tea_id = tea.tea_id
+        <include refid="selectLike"/>
+        order by cla.cla_id desc
+    </select>
+    <!--根据年级编号获取班级-->
+    <select id="getClzzByGraNum" resultMap="clazz">
+      select cla_id,cla_name from clazz where gra_num = #{num}
+    </select>
+
+    <select id="getClassByCourseId" resultMap="BaseResultMap">
+        select c.cla_id,c.cla_name,c.pro_id from clazz as c
+        <where>
+            <if test="id != null">
+                c.cla_id in (select cc.cla_id from clas_cou_rel as cc where cc.cou_id = #{id})
+            </if>
+        </where>
+    </select>
+
+    <!--根据专业的id查询班级-->
+    <select id="getClassWidByProId" resultMap="BaseResultMap">
+        select
+        c.cla_id,
+        c.cla_name,
+        c.cla_open_date,
+        c.cla_number,
+        t.tea_id,
+        t.tea_name,
+        p.pro_id,
+        p.pro_name
+        from clazz as c
+        left join teacher as t
+        on c.tea_id = t.tea_id
+        left join profession as p
+        on t.pro_id = p.pro_id
+        <where>
+            <if test="id != null">
+                c.pro_id = #{id}
+            </if>
+        </where>
+    </select>
+    <!--根据班级id获取班级的专业id-->
+    <select id="getClzzProWidthByClzzId" resultType="java.lang.Long">
+        select pro_id from clazz where cla_id = #{claId}
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Role">
+        <id column="r_id" property="rId" jdbcType="BIGINT"/>
+        <result column="r_num" property="rNum" jdbcType="VARCHAR"/>
+        <result column="r_name" property="rName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from role
+    where r_id = #{rId,jdbcType=BIGINT}
+  </delete>
+    <!--根据角色id和权限id 删除关系-->
+    <delete id="delRoleAndPerWidthRidAndPid">
+      delete from role_permission_rel where r_id = #{rId} and p_id = #{pId}
+  </delete>
+    <!--根据角色Id  删除角色和权限的关系-->
+    <delete id="delRoleAndPerWidthByRid">
+      delete from role_permission_rel where r_id = #{rid}
+    </delete>
+    <insert id="insert" parameterType="club.lw666.domain.Role">
+    insert into role (r_id, r_num, r_name
+      )
+    values (#{rId,jdbcType=BIGINT}, #{rNum,jdbcType=VARCHAR}, #{rName,jdbcType=VARCHAR}
+      )
+  </insert>
+    <!--根据角色id和权限id 添加关系-->
+    <insert id="addRoleAndPerWidthRidAndPid">
+        insert into role_permission_rel (r_id,p_id) values (#{rId},#{pId})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Role">
+    update role
+    set r_num = #{rNum,jdbcType=VARCHAR},
+      r_name = #{rName,jdbcType=VARCHAR}
+    where r_id = #{rId,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select r_id, r_num, r_name
+    from role
+    where r_id = #{rId,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select r_id, r_num, r_name
+    from role
+  </select>
+    <!--根据角色id查询角色名称-->
+    <select id="getRoleNameWidthByRoleId" resultType="java.lang.String">
+        select r_name from role where r_id = #{rId}
+    </select>
+    <select id="getPermissionNameWidthByRoleId" resultType="java.lang.String">
+        select p.p_resource from role_permission_rel as rp left join permission as p on rp.p_id = p.p_id where rp.r_id = (select r_id from role where r_id = #{rId})
+    </select>
+</mapper>

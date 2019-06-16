@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.ProfessionMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Profession">
+        <id column="pro_id" property="proId" jdbcType="BIGINT"/>
+        <result column="pro_name" property="proName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from profession
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="club.lw666.domain.Profession">
+    insert into profession (pro_id, pro_name)
+    values (#{proId,jdbcType=BIGINT}, #{proName,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Profession">
+    update profession
+    set pro_name = #{proName,jdbcType=VARCHAR}
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select pro_id, pro_name
+    from profession
+    where pro_id = #{proId,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select pro_id, pro_name
+    from profession
+  </select>
+</mapper>

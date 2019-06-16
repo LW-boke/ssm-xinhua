@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.ClasCouRelMapper" >
+  <resultMap id="BaseResultMap" type="club.lw666.domain.ClasCouRel" >
+    <id column="cla_id" property="claId" jdbcType="BIGINT" />
+    <id column="cou_id" property="couId" jdbcType="BIGINT" />
+    <result column="tea_id" property="teaId" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from clas_cou_rel
+    where cla_id = #{claId,jdbcType=BIGINT}
+      and cou_id = #{couId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="club.lw666.domain.ClasCouRel" >
+    insert into clas_cou_rel (cla_id, cou_id, tea_id
+      )
+    values (#{claId,jdbcType=BIGINT}, #{couId,jdbcType=BIGINT}, #{teaId,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="club.lw666.domain.ClasCouRel" >
+    update clas_cou_rel
+    set tea_id = #{teaId,jdbcType=BIGINT}
+    where cla_id = #{claId,jdbcType=BIGINT}
+      and cou_id = #{couId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select cla_id, cou_id, tea_id
+    from clas_cou_rel
+    where cla_id = #{claId,jdbcType=BIGINT}
+      and cou_id = #{couId,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select cla_id, cou_id, tea_id
+    from clas_cou_rel
+  </select>
+</mapper>

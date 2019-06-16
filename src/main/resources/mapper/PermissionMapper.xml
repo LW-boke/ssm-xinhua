@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.PermissionMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.Permission">
+        <id column="p_id" property="pId" jdbcType="BIGINT"/>
+        <result column="p_name" property="pName" jdbcType="VARCHAR"/>
+        <result column="p_resource" property="pResource" jdbcType="VARCHAR"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from permission
+    where p_id = #{pId,jdbcType=BIGINT}
+  </delete>
+    <!--根据权限id  删除和角色的关系-->
+    <delete id="delRoleAndPerWidthByPid">
+        delete from role_permission_rel where p_id = #{pId}
+    </delete>
+    <insert id="insert" parameterType="club.lw666.domain.Permission">
+    insert into permission (p_id, p_name, p_resource
+      )
+    values (#{pId,jdbcType=BIGINT}, #{pName,jdbcType=VARCHAR}, #{pResource,jdbcType=VARCHAR}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Permission">
+    update permission
+    set p_name = #{pName,jdbcType=VARCHAR},
+      p_resource = #{pResource,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select p_id, p_name, p_resource
+    from permission
+    where p_id = #{pId,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select p_id, p_name, p_resource
+        from permission
+        <where>
+            <if test="keyword!=null and keyword!=''">
+                p_name like concat("%",#{keyword},"%")
+            </if>
+        </where>
+        order by p_id
+    </select>
+    <select id="getPermissionWidthByRoleId" resultMap="BaseResultMap">
+        select * from permission
+        <where>
+            <if test="rid!=null and rid!= ''">
+                p_Id in (select p_id from role_permission_rel where r_Id = #{rid})
+            </if>
+        </where>
+    </select>
+    <select id="getPermissionChuRoleId" resultMap="BaseResultMap" parameterType="Long[]">
+        select * from permission
+        <where>
+            <if test="arrPid!=null">
+                <foreach collection="arrPid" item="arrPid" open="p_id not in(" close=")" separator=",">
+                    #{arrPid}
+                </foreach>
+            </if>
+
+        </where>
+    </select>
+</mapper>

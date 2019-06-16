@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.lw666.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="club.lw666.domain.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="name" property="name"/>
+        <result column="admin" property="admin"/>
+        <association property="roles" javaType="Role">
+            <id column="r_id" property="rId" jdbcType="BIGINT"/>
+            <result column="r_num" property="rNum" jdbcType="VARCHAR"/>
+            <result column="r_name" property="rName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="club.lw666.domain.User">
+    insert into user (id, username, password, 
+      `name`, admin, role_id)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{admin,jdbcType=BIT}, #{roles.rId,jdbcType=BIGINT})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="club.lw666.domain.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      admin = #{admin,jdbcType=BIT},
+      role_id = #{roles.rId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, username, password, name, admin, role
+    from user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <!--获取所有的用户账号 并且进行分页-->
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        u.id,
+        u.username,
+        u.`name`,
+        u.admin,
+        r.r_id,
+        r.r_name
+        from user as u left join role as r on u.role_id = r.r_id
+        <where>
+            <if test="keyword!=null ">
+                u.username like concat("%",#{keyword},"%")
+                OR u.name like concat("%",#{keyword},"%")
+            </if>
+        </where>
+        order by u.id desc
+    </select>
+    <!--根据账号 查询用户-->
+    <select id="geuUserWidthByUsername" resultMap="BaseResultMap">
+        select * from user as u left join role as r on u.role_id = r.r_id  where username = #{username}
+    </select>
+
+    <select id="getRoleWidthByRoleId" resultType="java.lang.String">
+
+    </select>
+</mapper>

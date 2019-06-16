@@ -1,0 +1,27 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <!-- 将权限数据写入内存  如果内存数据写满了，写到 磁盘配置目录中-->
+    <!--磁盘存储的路径 临时文件目录-->
+    <!--maxElementsInMemory内存中最大允许创建的对象数-->
+    <!--eternal内存中对象是否为永久的，如果是true，超时设置将被忽略，对象从不过期 -->
+    <!--timeToIdleSeconds设置对象在它过期之前的空闲时间  可选属性，默认值是0，也就是可闲置时间无穷大-->
+    <!--timeToLiveSeconds设置对象在失效前允许存活时间。最大时间介于创建时间和失效时间之间。仅当对象不是永久有效时使用，默认是0.，也就是element存活时间无穷大-->
+    <!--overflowToDisk配置此属性，当内存中对象数量达到maxElementsInMemory时，Ehcache将会对象写到磁盘中（必须要实现序列化接口）。-->
+    <!--maxElementsOnDisk磁盘中最大缓存对象数，若是0表示无穷大-->
+    <!--diskPersistent是否缓存虚拟机重启期数据。-->
+    <!--diskExpiryThreadIntervalSeconds磁盘失效线程运行时间间隔，默认是120秒-->
+    <!--memoryStoreEvictionPolicy当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）-->
+    <!--overflowToDisk  -->
+    <defaultCache
+            maxElementsInMemory="1000"
+            maxElementsOnDisk="10000000"
+            eternal="false"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
+    </defaultCache>
+</ehcache>
