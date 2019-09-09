@@ -1,15 +1,11 @@
 package club.lw666.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class PageListRes {
     private Long total;
     private List<?> rows = new ArrayList<>();

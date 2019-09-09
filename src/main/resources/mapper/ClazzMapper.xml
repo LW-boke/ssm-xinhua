@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club.lw666.mapper.ClazzMapper">
     <resultMap id="BaseResultMap" type="club.lw666.domain.Clazz">
         <id column="cla_id" property="claId" jdbcType="BIGINT"/>
@@ -7,7 +8,8 @@
         <result column="cla_number" property="claNumber" javaType="INT"/>
         <result column="cla_open_date" property="claOpenDate" jdbcType="DATE"/>
         <result column="pro_id" property="proId"/>
-        <association property="refNumber" javaType="Integer" select="club.lw666.mapper.StudentMapper.getStudentByClsNum"
+        <association property="refNumber" javaType="Integer"
+                     select="club.lw666.mapper.StudentMapper.getStudentByClsNum"
                      column="cla_id"/>
         <!--年级-->
         <association property="grade" javaType="Grade">
@@ -44,7 +46,8 @@
     where cla_id = #{claId,jdbcType=BIGINT}
   </delete>
 
-    <insert id="insert" parameterType="club.lw666.domain.Clazz" useGeneratedKeys="true" keyProperty="claId"
+    <insert id="insert" parameterType="club.lw666.domain.Clazz" useGeneratedKeys="true"
+            keyProperty="claId"
             keyColumn="cla_id">
             insert into clazz (
                cla_id,

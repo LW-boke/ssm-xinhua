@@ -1,12 +1,11 @@
 package club.lw666.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-@Setter@Getter@ToString
+
+@Data
 public class Menu {
     private Integer id;
 

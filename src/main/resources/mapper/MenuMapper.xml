@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club.lw666.mapper.MenuMapper">
     <resultMap id="BaseResultMap" type="club.lw666.domain.Menu">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -12,16 +13,17 @@
             <result column="p_resource" property="pResource" jdbcType="VARCHAR"/>
         </association>
 
-        <collection property="children" ofType="club.lw666.domain.Menu" select="getMenuWidthByParentId" column="id"/>
+        <collection property="children" ofType="club.lw666.domain.Menu"
+                    select="getMenuWidthByParentId" column="id"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
     <insert id="insert" parameterType="club.lw666.domain.Menu">
-    insert into menu (id, text, url, 
+    insert into menu (id, text, url,
       parent_id, permission_id)
-    values (#{id,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
       #{parentId,jdbcType=INTEGER}, #{permissionId,jdbcType=BIGINT})
   </insert>
     <update id="updateByPrimaryKey" parameterType="club.lw666.domain.Menu">

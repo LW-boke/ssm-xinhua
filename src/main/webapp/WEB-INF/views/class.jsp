@@ -57,7 +57,7 @@
             <input type="hidden" name="claId">
             <tr>
                 <td>班级名称:</td>
-                <td><input type="text" name="claName" class="easyui-validatebox" data-options="required:true"/></td>
+                <td><input type="text" name="claName" class="easyui-validatebox" data-options="required:true"></td>
             </tr>
             <tr>
                 <td>应有人数:</td>

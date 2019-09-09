@@ -1,17 +1,17 @@
 package club.lw666.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Setter
-@Getter
-@ToString
-public class Student {
+@Data
+public class Student implements Serializable {
+
+    private static final long serialVersionUID = 200906697193473508L;
+
     private Long stuId;
 
     private String stuName;

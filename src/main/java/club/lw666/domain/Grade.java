@@ -1,12 +1,9 @@
 package club.lw666.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Setter
-@Getter
-@ToString
+
+@Data
 public class Grade {
     private Integer graNum;
 

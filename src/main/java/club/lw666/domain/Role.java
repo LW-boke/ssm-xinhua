@@ -1,12 +1,9 @@
 package club.lw666.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Setter
-@Getter
-@ToString
+import lombok.Data;
+
+@Data
 public class Role {
     private Long rId;
 

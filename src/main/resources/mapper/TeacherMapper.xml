@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="club.lw666.mapper.TeacherMapper">
     <resultMap id="BaseResultMap" type="club.lw666.domain.Teacher">
         <id column="tea_id" property="teaId" jdbcType="BIGINT"/>
@@ -33,10 +34,10 @@
     where tea_id = #{teaId,jdbcType=BIGINT}
   </delete>
     <insert id="insert" parameterType="club.lw666.domain.Teacher">
-    insert into teacher (tea_id, tea_name, tea_sex, 
+    insert into teacher (tea_id, tea_name, tea_sex,
       tea_age, tea_enrol,tea_about,tea_phone,
       tea_site,pro_id)
-    values (#{teaId,jdbcType=BIGINT}, #{teaName,jdbcType=VARCHAR}, #{teaSex,jdbcType=BIT}, 
+    values (#{teaId,jdbcType=BIGINT}, #{teaName,jdbcType=VARCHAR}, #{teaSex,jdbcType=BIT},
       #{teaAge,jdbcType=DATE}, #{teaEnrol,jdbcType=DATE},#{teaAbout}, #{teaPhone,jdbcType=VARCHAR},
       #{teaSite,jdbcType=VARCHAR},#{profession.proId})
   </insert>
@@ -108,7 +109,8 @@
         select * from teacher
         <where>
             <if test="clasId !=null and couId != null">
-                tea_id in(select tea_id from clas_cou_rel where cla_id = #{clasId} and cou_id = #{couId});
+                tea_id in(select tea_id from clas_cou_rel where cla_id = #{clasId} and cou_id =
+                #{couId});
             </if>
         </where>
     </select>

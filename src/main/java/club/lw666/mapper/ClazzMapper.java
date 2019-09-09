@@ -17,10 +17,20 @@ public interface ClazzMapper {
 
     int updateByPrimaryKey(Clazz record);
 
-    /*获取clazz数据并且进行分页*/
+    /**
+     * 获取clazz数据并且进行分页
+     *
+     * @param queryVo {@link QueryVo}
+     * @return {@code List<Clazz>}
+     */
     List<Clazz> queryClazzPage(QueryVo queryVo);
 
-    /*根据年级编号获取班级*/
+    /**
+     * 根据年级编号获取班级
+     *
+     * @param num 班号
+     * @return
+     */
     List<Clazz> getClzzByGraNum(Integer num);
 
     /*根据课程的id获取班级*/

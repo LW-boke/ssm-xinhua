@@ -41,7 +41,8 @@
     </bean>
 
     <!--任凭匹配器-->
-    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+    <bean id="credentialsMatcher"
+          class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <!--散列算法-->
         <property name="hashAlgorithmName" value="md5"/>
         <!--散列次数-->

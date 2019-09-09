@@ -1,17 +1,18 @@
 package club.lw666.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Setter
-@Getter
-@ToString
-public class Teacher {
+@Data
+public class Teacher implements Serializable {
+
+
+    private static final long serialVersionUID = -32569677457015687L;
+
     private Long teaId;
 
     private String teaName;

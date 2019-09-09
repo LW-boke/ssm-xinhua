@@ -15,6 +15,7 @@
 ">
     <!--开启注解-->
     <context:component-scan base-package="club.lw666"/>
+
     <!--导入springmvc配置文件-->
     <import resource="classpath:application-mvc.xml"/>
     <!--导入mybatis配置文件-->
