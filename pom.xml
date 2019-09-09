@@ -19,6 +19,7 @@
         <!--定义版本号   ${org.springframework.version}-->
         <org.springframework.version>5.0.7.RELEASE</org.springframework.version>
         <org.mybatis.version>3.4.6</org.mybatis.version>
+        <jackson.version>2.9.9</jackson.version>
     </properties>
 
     <dependencies>
@@ -155,25 +156,25 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.9.4</version>
+            <version>${jackson.version}</version>
         </dependency>
         <!--jackson-databind-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.4</version>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!--jackson-annotations 转换时间-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <!--pagehelper   mybatis分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>4.1.4</version>
-        </dependency>
-        <!--jackson-annotations 转换时间-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-annotations</artifactId>
-            <version>2.9.4</version>
         </dependency>
         <!--slf4j-api-->
         <dependency>
