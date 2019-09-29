@@ -39,23 +39,23 @@
 
 **年级模块**
 
-![](C:\Users\slayer\AppData\Roaming\Typora\typora-user-images\1569768069520.png)
+![](https://github.com/LW-boke/picture/blob/master/images/xinhua-ssm/1569768069520.png?raw=true)
 
-**教师模块**
+**学生模块**
 
-![](C:\Users\slayer\AppData\Roaming\Typora\typora-user-images\1569768095553.png)
+![](https://github.com/LW-boke/picture/blob/master/images/xinhua-ssm/1569768095553.png?raw=true)
 
 **班级模块**
 
-![](C:\Users\slayer\AppData\Roaming\Typora\typora-user-images\1569768127944.png)
+![](https://github.com/LW-boke/picture/blob/master/images/xinhua-ssm/1569768127944.png?raw=true)
 
 **课程模块**
 
-![](C:\Users\slayer\AppData\Roaming\Typora\typora-user-images\1569768167587.png)
+![](https://github.com/LW-boke/picture/blob/master/images/xinhua-ssm/1569768167587.png?raw=true)
 
 **权限模块**
 
-![](C:\Users\slayer\AppData\Roaming\Typora\typora-user-images\1569768223948.png)
+![](https://github.com/LW-boke/picture/blob/master/images/xinhua-ssm/1569768223948.png?raw=true)
 
  其他的模块我就不跟大家展示了，想了解更多的可以拉下来观看即可！！！
 
