@@ -12,6 +12,9 @@
             margin-top: 10px;
             width: 200px;
             outline: none;
+            padding-left: 5px;
+            border-radius: 4px;
+            border: 1px solid #e3e3e3;
         }
 
         .win_course_left {

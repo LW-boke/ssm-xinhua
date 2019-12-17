@@ -11,7 +11,6 @@ public interface CourseService {
     /*获取所有的课程  进行分页*/
     PageListRes getCourses(QueryVo queryVo);
 
-
     /*根据班级id 获取课程*/
     List<Course> getClassCourseById(int id);
 

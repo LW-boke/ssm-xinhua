@@ -8,6 +8,8 @@
     margin-top: 10px;
     width: 200px;
     outline: none;
+    border-radius: 4px;
+    border: 1px solid #e3e3e3;
 }
 
 .menu_left h3 {

@@ -14,7 +14,7 @@
         <img src="static/images/logon.png" alt="">
     </div>
     <div class="head-right">
-        <span>Hi <font color="red"><shiro:principal property="name"/></font> </span>
+        <span> <font color="red"><shiro:principal property="name"/></font> </span>
         <a href="/logOut">注销登录</a>
     </div>
 </div>
@@ -22,16 +22,16 @@
 <%--左部--%>
 <div data-options="region:'west',split:true" style="width:200px;">
     <%--分类--%>
-    <div id="accordion" class="easyui-accordion" style="width:300px;height:200px;">
+    <div id="accordion" class="easyui-accordion" style="width:300px;height:100%;">
         <div title="学校系统" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
             <ul id="tree_student"></ul>
         </div>
 
-        <shiro:hasAnyRoles name="校长,副校长">
-            <div title="其他" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">
-                <ul id="tree_else"></ul>
-            </div>
-        </shiro:hasAnyRoles>
+<%--        <shiro:hasAnyRoles name="校长,副校长">--%>
+<%--            <div title="其他" data-options="iconCls:'icon-save'" style="overflow:auto;padding:10px;">--%>
+<%--                <ul id="tree_else"></ul>--%>
+<%--            </div>--%>
+<%--        </shiro:hasAnyRoles>--%>
     </div>
 
 </div>

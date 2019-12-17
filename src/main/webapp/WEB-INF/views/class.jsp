@@ -18,6 +18,8 @@
             margin-top: 10px;
             width: 200px;
             outline: none;
+            border-radius: 4px;
+            border: 1px solid #e3e3e3;
         }
 
         #dialog_addCls {
@@ -46,7 +48,7 @@
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="flush">重新刷新</a>
     <input type="text" name="keyword" class="keywordCla" placeholder="请输入班级的名称">
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="findClas">查找班级</a>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: 300px"
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: 100px"
        id="show_course">查看班级课程</a>
     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="show_student">查看班级学生</a>
 </div>

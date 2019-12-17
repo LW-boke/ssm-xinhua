@@ -16,11 +16,34 @@
 </head>
 <body class="easyui-layout">
 
-<div data-options="region:'north'" style="height:80px; background-color: #333333;">
-    <h1 style="color:#fcfcfc;text-align: center"> 学生列表</h1>
+<div data-options="region:'north'" style="height:1px;">
+    <div id="btn_student">
+        <shiro:hasPermission name="addStudent">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin-left: 10px"
+               id="add_student">
+                添加学生
+            </a>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="editStudent">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" id="edit_student">
+                编辑学生
+            </a>
+        </shiro:hasPermission>
+        <shiro:hasPermission name="deleStudent">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" id="del_student">
+                删除学生
+            </a>
+        </shiro:hasPermission>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="flush_student">重新刷新</a>
+        <input type="text" name="keyword" class="keywordCla" placeholder="请输入学生的名称">
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="findStudent">查找学生</a>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: 50px"
+           id="down_studentExcel">下载Excel</a>
+        <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="updateExcel">上传Excel</a>
+    </div>
 </div>
 
-<div data-options="region:'center'">
+<div data-options="region:'center'" style="top: 0px;">
     <div class="easyui-layout" data-options="fit:true">
         <div data-options="region:'west',collapsed:true" style="width:180px">
             <div class="menu_left">
@@ -34,30 +57,7 @@
         </div>
         <div data-options="region:'center'">
             <table id="student_dg"></table>
-            <div id="btn_student">
-                <shiro:hasPermission name="addStudent">
-                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="margin-left: 10px"
-                       id="add_student">
-                        添加学生
-                    </a>
-                </shiro:hasPermission>
-                <shiro:hasPermission name="editStudent">
-                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" id="edit_student">
-                        编辑学生
-                    </a>
-                </shiro:hasPermission>
-                <shiro:hasPermission name="deleStudent">
-                    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" id="del_student">
-                        删除学生
-                    </a>
-                </shiro:hasPermission>
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-reload'" id="flush_student">重新刷新</a>
-                <input type="text" name="keyword" class="keywordCla" placeholder="请输入学生的名称">
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="findStudent">查找学生</a>
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="margin-left: 50px"
-                   id="down_studentExcel">下载Excel</a>
-                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" id="updateExcel">上传Excel</a>
-            </div>
+
         </div>
     </div>
 </div>
