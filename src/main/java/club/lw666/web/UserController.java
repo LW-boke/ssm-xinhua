@@ -23,6 +23,7 @@ public class UserController {
         return "user";
     }
 
+
     /*获取所有的用户账号 并且进行分页*/
     @RequestMapping("/getArrUsers")
     @ResponseBody
